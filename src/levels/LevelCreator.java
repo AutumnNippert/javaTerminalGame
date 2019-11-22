@@ -13,8 +13,7 @@ public class LevelCreator {
         for (int x = 0; x <= numberOfEnemies; x++)
         {
             String monsterName = util.randName();
-            Enemy enemy = new Enemy();
-            enemy.spawnEnemy(player.lvl * util.RandomNumber(2, 3),
+            Enemy enemy = new Enemy(player.lvl * util.RandomNumber(2, 3),
                     player.lvl * util.RandomNumber(2, 5),
                     player.lvl * util.RandomNumber(2, 4),
                     //Convert.ToInt32(Math.Pow(5, playerLevel)),

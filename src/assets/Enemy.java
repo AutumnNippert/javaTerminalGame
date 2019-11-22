@@ -9,7 +9,7 @@ public class Enemy {
 
     static MyUtil util = new MyUtil();
 
-    public void spawnEnemy(int Health, int Armor, int Atk, int Lvl, String Name)
+    public Enemy(int Health, int Armor, int Atk, int Lvl, String Name)
     {
         lvl = Lvl;
         health = Health;

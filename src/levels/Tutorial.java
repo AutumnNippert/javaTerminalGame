@@ -23,8 +23,7 @@ public class Tutorial {
         System.out.print(">>> oh ok");
         util.getNextLine();
         System.out.println("You have pissed off the dummy! He wanna fight!");
-        Enemy dummy = new Enemy();
-        dummy.spawnEnemy(5, 5, 0, 0, "dummy");
+        Enemy dummy = new Enemy(5, 5, 0, 0, "dummy");
         //System.out.println("\ndummy health is " + dummy.health);
         //System.out.println("dummy armor is " + dummy.armor + "\n");
         //System.out.println("player health is " + player.health);
@@ -65,8 +64,7 @@ public class Tutorial {
         System.out.println("You have pissed off the wrong dummy! He gonna kill you!");
         System.out.print(">>> shit!");
         util.getNextLine();
-        Enemy wrongDummy = new Enemy();
-        wrongDummy.spawnEnemy(99999999, 99999999, 1, 1, "wrong Dummy");
+        Enemy wrongDummy = new Enemy(99999999, 99999999, 1, 1, "wrong Dummy");
         System.out.println("dummy health now at " + wrongDummy.health);
         System.out.println("dummy armor now at " + wrongDummy.armor + "\n");
         System.out.println("player health now at 1");

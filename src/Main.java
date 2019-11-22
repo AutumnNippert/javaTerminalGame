@@ -8,9 +8,10 @@ public class Main {
     static void initGame()
     {
         player.clearInventory();
-        player.spawnPlayer();
         levelSelect.initLevelSelect(player);
-        player.addToInventory("Baguette");
+        player.addToInventory("baguette");
+        player.addToInventory("wooden sword level 1");
+        player.addToInventory("wooden shield level 1");
     }
 
     public static void main(String[] args) {

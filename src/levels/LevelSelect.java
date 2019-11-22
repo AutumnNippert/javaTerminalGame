@@ -13,33 +13,32 @@ public class LevelSelect {
             player.setLvl();
             System.out.print("\n>>> ");
             String command = util.getNextLine();
-            System.out.println(command);
             String[] words = command.split(" " ,4);
             if (words.length < 2)
             {
-                if (command == "start")
+                if (command.equals("start"))
                 {
                     util.clearScreen();
                     Tutorial tutorial = new Tutorial();
                     tutorial.InitTutorial(player);
                 }
-                if (command == "xp")
+                if (command.equals("xp"))
                 {
                     System.out.println(player.xp + "\n");
                 }
-                if (command == "RandomLevel")
+                if (command.equals("randomlevel"))
                 {
                     LevelCreator level = new LevelCreator();
                     level.initLevel(3, player);
                 }
-//                if (command == "save")
-//                {
-//                    util.saveGame(player);
-//                }
-//                if (command == "load")
-//                {
-//                    util.load(player);
-//                }
+                if (command.equals("save"))
+                {
+                    util.saveGame(player);
+                }
+                if (command.equals("load"))
+                {
+                    util.load(player);
+                }
             }
             else if (words.length >= 2)
             {

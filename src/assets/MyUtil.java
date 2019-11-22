@@ -1,7 +1,16 @@
 package assets;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.Reader;
+import java.util.Iterator;
+import org.json.simple.*;
+import org.json.simple.parser.*;
 
 public class MyUtil {
     public String generateSmallLootItem()
@@ -67,57 +76,78 @@ public class MyUtil {
     }
     public static String getNextLine(){
         Scanner in = new Scanner(System.in);
-        try {
-            String out = in.nextLine().toLowerCase();
-            return out;
-        } finally {
-            in.close();
-            System.out.println("closed");
+        String out = "";
+        if(in.hasNext() || in.next().contains("\n")){
+            out = in.next().toLowerCase();
         }
+        return out;
     }
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-//    public void saveGame(Player player)
-//    {
-//        int lvl;
-//        int health;
-//        int armor;
-//        int atk;
-//        int xp;
-//        String[] inventory;
-//        try
-//        {
-//            Save save = new Save()
-//            {
-//                lvl = player.lvl,
-//                health = player.health,
-//                armor = player.armor,
-//                atk = player.atk,
-//                xp = player.xp,
-//                inventory = player.inventory
-//            };
-//            String strResultJSON = JsonConvert.SerializeObject(save);
-//            File.WriteAllText(@"save.json", strResultJSON);
-//        }
-//        catch
-//        {
-//
-//        }
-//    }
-//    public void load(Player player)
-//    {
-//        StreamReader file = File.OpenText("save.json");
-//        Save o1 = JsonConvert.DeserializeObject<Save>(file.ReadToEnd());
-//        player.lvl = o1.lvl;
-//        player.health = o1.health;
-//        player.armor = o1.armor;
-//        player.atk = o1.atk;
-//        player.xp = o1.xp;
-//        for(int x = 0; x < player.inventory.Length; x++){
-//
-//            player.inventory[x] = o1.inventory[x];
-//        }
-//    }
+    public void saveGame(Player player)
+    {
+        JSONObject save = new JSONObject();
+
+        save.put("lvl",player.lvl);
+        save.put("health",player.health);
+        save.put("armor",player.armor);
+        save.put("atk",player.atk);
+        save.put("xp",player.xp);
+        save.put("inventory", player.inventory);
+
+        StringWriter out = new StringWriter();
+        try {
+            save.writeJSONString(out);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String jsonText = out.toString();
+        try (FileWriter file = new FileWriter("save.json")) {
+            file.write(jsonText);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void load(Player player)
+    {
+        JSONParser parser = new JSONParser();
+
+        try (Reader reader = new FileReader("save.json")) {
+
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+            System.out.println(jsonObject);
+
+            int lvl = (int) jsonObject.get("lvl");
+            int health = (int) jsonObject.get("health");
+            int armor = (int) jsonObject.get("armor");
+            int atk = (int) jsonObject.get("atk");
+            int xp = (int) jsonObject.get("xp");
+            String[] inventory = (String[]) jsonObject.get("inventory");
+
+            // loop array
+            JSONArray msg = (JSONArray) jsonObject.get("messages");
+            Iterator<String> iterator = msg.iterator();
+            while (iterator.hasNext()) {
+                System.out.println(iterator.next());
+            }
+
+            player.lvl = lvl;
+            player.health = health;
+            player.armor = armor;
+            player.atk = atk;
+            player.xp = xp;
+            for(int x = 0; x < player.inventory.length; x++){
+
+                player.inventory[x] = inventory[x];
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 }
