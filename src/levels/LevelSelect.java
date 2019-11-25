@@ -13,7 +13,10 @@ public class LevelSelect {
             player.setLvl();
             System.out.print("\n>>> ");
             String command = util.getNextLine();
-            String[] words = command.split(" " ,4);
+            String words[] = command.split(" " ,4);
+            for (int i = 0; i<words.length; i++){
+                System.out.println(words[i]);
+            }
             if (words.length < 2)
             {
                 if (command.equals("start"))
@@ -41,58 +44,58 @@ public class LevelSelect {
                 }
             }
             else if (words.length >= 2)
-            {
-                if (words[0] == "drop")
-                {
-                    String itemCheck = "";
-                    for (int i = 0; i <= 9; i++)
-                    {
-                        itemCheck = player.getInventory(i);
-                        if (itemCheck == words[1])
-                        {
-                            System.out.print("Are you sure you want to drop " + words[1] + "?\n>>> ");
-                            String dropTrue = util.getNextLine();
-                            if (dropTrue == "yes" || dropTrue == "y")
-                            {
-                                player.removeFromInventory(words[1]);
-                                break;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    if (itemCheck != words[1])
-                    {
-                        System.out.println("You do not have that item");
-                    }
-                }
-                if (words[0] == "eat")
-                {
-                    String itemCheck = "";
-                    for (int i = 0; i <= 9; i++)
-                    {
-                        itemCheck = player.getInventory(i);
-                        if (itemCheck == words[1])
-                        {
-                            player.removeFromInventory(words[1]);
-                            break;
-                        }
-                    }
-                    if (itemCheck != words[1])
-                    {
-                        System.out.println("You do not have that item");
-                    }
-                }
+            {System.out.println("2 words or more");
+//                if (words[0] == "drop")
+//                {
+//                    Item itemCheck;
+//                    for (int i = 0; i <= 9; i++)
+//                    {
+//                        itemCheck = player.getInventory(i);
+//                        if (itemCheck == Item.getItemById(words[1]))
+//                        {
+//                            System.out.print("Are you sure you want to drop " + words[1] + "?\n>>> ");
+//                            String dropTrue = util.getNextLine();
+//                            if (dropTrue == "yes" || dropTrue == "y")
+//                            {
+//                                player.removeFromInventory(itemCheck);
+//                                break;
+//                            }
+//                            else
+//                            {
+//                                break;
+//                            }
+//                        }
+//                    }
+//                    if (itemCheck != words[1])
+//                    {
+//                        System.out.println("You do not have that item");
+//                    }
+//                }
+//                if (words[0] == "eat")
+//                {
+//                    String itemCheck = "";
+//                    for (int i = 0; i <= 9; i++)
+//                    {
+//                        itemCheck = player.getInventory(i);
+//                        if (itemCheck == words[1])
+//                        {
+//                            player.removeFromInventory(words[1]);
+//                            break;
+//                        }
+//                    }
+//                    if (itemCheck != words[1])
+//                    {
+//                        System.out.println("You do not have that item");
+//                    }
+//                }
                 if (words[0] == "view")
                 {
                     if (words[1] == "inventory")
                     {
-                        System.out.println("\n");
+                        System.out.println("okv");
                         for (int i = 0; i <= 9; i++)
                         {
-                            System.out.println("[" + i + "] " + player.getInventory(i) + "\n");
+                            System.out.println("[" + i + "] " + player.getInventory(i).name + "\n");
                         }
                     }
                 }

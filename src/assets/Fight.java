@@ -7,7 +7,7 @@ public class Fight {
         util.clearScreen();
         System.out.println("assets.Fight\n");
         player.setArmor();
-        player.setAttackDmg();
+        player.setAttackDamage();
         while (player.health > 0 && enemy.health > 0)
         {
             displayBattleStats(player, enemy.name, enemy);

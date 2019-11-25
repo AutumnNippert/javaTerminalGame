@@ -1,5 +1,10 @@
 package assets;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Iterator;
+import java.util.Set;
+
 public class Player {
     static MyUtil util = new MyUtil();
     public int lvl = 1;
@@ -7,47 +12,40 @@ public class Player {
     public int armor = 0;
     public int atk = 0;
     public int xp = 0;
-    public String inventory[] = new String[10];
+    public Item inventory[] = new Item[10];
 
-    public Player() {
+    public void spawnPlayer() {
         setHealth();
-        //setArmor();
+        setArmor();
     }
 
-    public void clearInventory() {
-        inventory[0] = "empty";
-        inventory[1] = "empty";
-        inventory[2] = "empty";
-        inventory[3] = "empty";
-        inventory[4] = "empty";
-        inventory[5] = "empty";
-        inventory[6] = "empty";
-        inventory[7] = "empty";
-        inventory[8] = "empty";
-        inventory[9] = "empty";
+    public void clearInventory(Player player) {
+        for (int i = 0; i < player.inventory.length; i++) {
+            player.inventory[i] = Item.getItemById(24);
+        }
     }
 
-    public String addToInventory(String item) {
+    public String addToInventory(Item item) {
         for (int i = 0; i <= 9; i++) {
-            if (inventory[i].equals("empty")) {
+            if (inventory[i].name.equals("empty")) {
                 inventory[i] = item;
-                return item + " successfully added to inventory";
+                return item.name + " successfully added to inventory";
             }
         }
         return "your inventory is full";
     }
 
-    public String removeFromInventory(String item) {
+    public String removeFromInventory(Player player, Item item) {
         for (int i = 0; i <= 9; i++) {
             if (inventory[i] == item) {
-                inventory[i] = "empty";
-                return item + " successfully removed from inventory";
+                player.inventory[i] = Item.getItemById(0);
+                return item.name + " successfully removed from inventory";
             }
         }
         return "you do not have this item";
     }
 
-    public String getInventory(int index) {
+    public Item getInventory(int index) {
         return inventory[index];
     }
 
@@ -59,127 +57,28 @@ public class Player {
         health = 10;
     }
 
-//    public void setAttackDmg() {
-//        String item;
-//        for (int i = 0; i <= 9; i++) {
-//            item = inventory[i];
-//            String commandString = util.getNextLine();
-//            String[] Item = commandString.split(" ", 4);
-//            if (Item[1].equals("sword")
-//            ) {
-//                String level = Item[3];
-//                String sword = Item[0];
-//                if (item.equals("master sword")) {
-//                    atk = 100 * lvl;
-//                    break;
-//                }
-////                String sword = m.Groups[1].ToString();
-////                Regex firstWord = new Regex(@"((?<= lvl ).*$)", RegexOptions.IgnoreCase | RegexOptions.Singleline);
-////                Match match = firstWord.Match(item);
-////                String level = match.Groups[1].ToString();
-//                //Console.WriteLine(level);
-//
-//                if (sword.equals("beginner")) {
-//                    if (level.equals("1")) {
-//                        atk = (int) (2 * Math.pow(lvl, 5));
-//                    }
-//                    if (level.equals("2")) {
-//                        atk = (int) (3 * Math.pow(lvl, 5));
-//                    }
-//                    if (level.equals("3")) {
-//                        atk = (int) (5 * Math.pow(lvl, 5));
-//                    }
-//                } else if (sword.equals("wooden")) {
-//                    if (level.equals("1")) {
-//                        atk = 8 * lvl;
-//                    }
-//                    if (level.equals("2")) {
-//                        atk = 12 * lvl;
-//                    }
-//                    if (level.equals("3")) {
-//                        atk = 16 * lvl;
-//                    }
-//                } else if (sword.equals("iron")) {
-//                    if (level.equals("1")) {
-//                        atk = 20 * lvl;
-//                    }
-//                    if (level.equals("2")) {
-//                        atk = 25 * lvl;
-//                    }
-//                    if (level.equals("3")) {
-//                        atk = 30 * lvl;
-//                    }
-//                } else if (sword.equals("ancient")) {
-//                    if (level.equals("1")) {
-//                        atk = 40 * lvl;
-//                    }
-//                    if (level.equals("2")) {
-//                        atk = 50 * lvl;
-//                    }
-//                    if (level.equals("3")) {
-//                        atk = 60 * lvl;
-//                    }
-//                } else {
-//                }
-//            }
-//        }
-//    }
-//
-//    public void setArmor() {
-//        String item;
-//        for (int i = 0; i <= 9; i++) {
-//            item = inventory[i];
-//            String[] Item = item.split(" ", 4);
-//            if (Item.length > 1) {
-//                if (Item[1].equals("shield")) {
-//                    String shield = Item[0];
-//                    String level = Item[3];
-//
-//                    if (shield.equals("beginner")) {
-//                        if (level.equals("1")) {
-//                            armor = 1;
-//                        }
-//                        if (level.equals("2")) {
-//                            armor = 3;
-//                        }
-//                        if (level.equals("3")) {
-//                            armor = 5;
-//                        }
-//                    } else if (shield.equals("wooden")) {
-//                        if (level.equals("1")) {
-//                            armor = 8;
-//                        }
-//                        if (level.equals("2")) {
-//                            armor = 12;
-//                        }
-//                        if (level.equals("3")) {
-//                            armor = 16;
-//                        }
-//                    } else if (shield.equals("iron")) {
-//                        if (level.equals("1")) {
-//                            armor = 20;
-//                        }
-//                        if (level.equals("2")) {
-//                            armor = 25;
-//                        }
-//                        if (level.equals("3")) {
-//                            armor = 30;
-//                        }
-//                    } else if (shield.equals("ancient")) {
-//                        if (level.equals("1")) {
-//                            armor = 40;
-//                        }
-//                        if (level.equals("2")) {
-//                            armor = 50;
-//                        }
-//                        if (level.equals("3")) {
-//                            armor = 60;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    public void setAttackDamage() {
+        for (int i = 0; i <= 9; i++) {
+            Item invItem = inventory[i];
+            for(int a = 0; a < ItemList.items.length; a++){
+                Item item = Item.getItemById(a);
+                if(invItem == item){
+                    atk = item.attack;
+                }
+            }
+        }
+    }
+    public void setArmor() {
+        for (int i = 0; i <= 9; i++) {
+            Item invItem = inventory[i];
+            for(int a = 0; a < ItemList.items.length; a++){
+                Item item = Item.getItemById(a);
+                if(invItem == item){
+                    armor = item.armor;
+                }
+            }
+        }
+    }
 
     public int getArmor() {
         return armor;
@@ -208,7 +107,7 @@ public class Player {
         }
     }
 
-    //setLvl sets thelevel of the player based on the xp they have aquired
+    //setLvl sets the level of the player based on the xp they have aquired
     public void setLvl() {
         lvl = (int) (Math.pow(xp, (1 / 6)));
     }

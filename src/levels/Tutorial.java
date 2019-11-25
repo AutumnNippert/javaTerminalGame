@@ -80,16 +80,16 @@ public class Tutorial {
         util.stringLetterByLetter(ting);
         System.out.print(">>> What just happened?");
         util.getNextLine();
-        String item = util.generateSmallLootItem();
+        //String item = util.generateSmallLootItem();
         String dialogue = (
-                "\nlooks like he dropped a " + item + "!\n" +
+                "\nlooks like he dropped a " + /*item.name +*/  "!\n" +
                         "Each time you complete a level, you have the chance\n" +
                         "to take the item, but only if your inventory has space.\n\n" +
                         "Now you're back at the level selection where you can view\n" +
                         "your inventory and other things.\n"
         );
         util.stringLetterByLetter(dialogue);
-        player.addToInventory(item);
+        //player.addToInventory(item);
         System.out.print(">>> Welp, ok then");
         util.getNextLine();
     }

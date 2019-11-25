@@ -1,5 +1,6 @@
 import assets.*;
 import levels.*;
+import org.json.simple.ItemList;
 
 public class Main {
 
@@ -7,11 +8,11 @@ public class Main {
     static LevelSelect levelSelect = new LevelSelect();
     static void initGame()
     {
-        player.clearInventory();
+        player.spawnPlayer();
+        player.clearInventory(player);
+        player.addToInventory(Item.getItemById(0));
+        player.addToInventory(Item.getItemById(12));
         levelSelect.initLevelSelect(player);
-        player.addToInventory("baguette");
-        player.addToInventory("wooden sword level 1");
-        player.addToInventory("wooden shield level 1");
     }
 
     public static void main(String[] args) {

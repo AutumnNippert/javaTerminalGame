@@ -125,7 +125,7 @@ public class MyUtil {
             int armor = (int) jsonObject.get("armor");
             int atk = (int) jsonObject.get("atk");
             int xp = (int) jsonObject.get("xp");
-            String[] inventory = (String[]) jsonObject.get("inventory");
+            Item[] inventory = (Item[]) jsonObject.get("inventory");
 
             // loop array
             JSONArray msg = (JSONArray) jsonObject.get("messages");
